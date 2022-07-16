@@ -1,17 +1,10 @@
-const axios = require('axios')
+const axios = require('axios');
+
+const { TIMEOUT } = process.env;
 
 module.exports = (baseUrl) => {
-  const apiAdapter = axios.create({
+  return axios.create({
     baseURL: baseUrl,
-    timeout: process.env.TIMEOUT || 5000,
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-
-  return {
-    get: (url, params) => {
-      return apiAdapter.get(url, { params })
-    }
-  }
+    timeout: parseInt(TIMEOUT)
+  });
 }
